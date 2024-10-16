@@ -24,7 +24,7 @@
   align-items: center;
   justify-content: center;
   font-size: 30px;
-  color: white;
+  color: #7abcff;
   margin-bottom: 20px;
 }
 
@@ -41,7 +41,7 @@
 input[name="genericInput"] {
   padding: 10px;
   font-size: 18px;
-  border: 2px solid blue;
+  border: 2px solid #7abcff;
   border-radius: 4px;
   margin-right: 10px;
   outline: none;
@@ -53,14 +53,14 @@ button {
   padding: 10px 20px;
   font-size: 16px;
   color: white;
-  background-color: blue;
+  background-color: #7abcff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-.weather-card {
+/* .weather-card {
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -93,5 +93,87 @@ button {
 .weather-info p {
   font-size: 20px;
   margin: 0;
+} */
+* {
+  box-sizing: border-box;
+  font-family: 'Helvetica Light', 'Helvetica', Arial, sans-serif;
+  font-weight: lighter;
+  text-transform: capitalize;
+  color: white;
 }
 
+html, body, .wrapper {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0 auto;
+}
+
+.wrapper {
+  margin: 20px;
+}
+
+.weather {
+  position: relative;
+  height: 275px;
+  width: 400px;
+  background: radial-gradient(ellipse at center, #7abcff 0%, #60abf8 44%, #4096ee 100%);
+  border-radius: 10px;
+  top: calc(50% - 125px);
+  left: calc(50% - 200px);
+  border: 3px solid #FFFFFF;
+  padding: 10px 20px;
+}
+
+.city h1 {
+  padding: 0;
+  margin: 5px 0px;
+  text-align: center;
+  font-size: 11pt;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  font-weight: normal;
+}
+
+.icon {
+  width: 50%;
+  height: auto;
+  float: left;
+  padding: 2px;
+  margin: 2px 0;
+  position: relative;
+}
+
+img {
+  height: 30vmin;
+}
+
+.temp {
+  width: 50%;
+  float: left;
+  padding: 10px;
+  color: #FFFFFF;
+  margin: 5px 0;
+}
+
+.current {
+  font-size: 30pt;
+  text-align: center;
+  font-weight: lighter;
+}
+
+.clearfix {
+  clear: both;
+  width: 100%;
+  border-top: 3px solid #FFFFFF;
+  position: relative;
+  top: -10px;
+}
+
+.date {
+  text-align: center;
+  position: relative;
+  top: -30px;
+  color: #FFFFFF;
+  font-size: 18pt;
+}

@@ -139,7 +139,7 @@ function App() {
           high={weatherCurrentData.main.temp_max} // Assurez-vous que ces valeurs sont disponibles
           low={weatherCurrentData.main.temp_min}
           icon={weatherCurrentData.weather[0].icon}
-          city={city}
+          city={weatherCurrentData.name}
           date={Date.now()}
         />
       )}
@@ -153,7 +153,7 @@ function App() {
               description={forecast.weather[0].description}
               temperature={forecast.main.temp}
               icon={forecast.weather[0].icon}
-              city={city}
+              city={weatherData.city.name}
               date={forecast.dt_txt}
               high={forecast.main.temp_max} 
               low={forecast.main.temp_min}

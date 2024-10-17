@@ -2,7 +2,6 @@ import './App.scss';
 import Header from './components/Header';
 import GenericInput from './components/GenericInput';
 import { useGeolocated } from "react-geolocated";
-import WeatherDisplayCopy from './components/WeatherDisplayCopy';
 import WeatherDisplay from './components/WeatherDisplay';
 import { useState, useEffect } from 'react';
 import Slider from 'react-slick'; 

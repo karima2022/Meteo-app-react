@@ -1,19 +1,46 @@
-import './App.css';
+import './App.scss';
 import Header from './components/Header';
 import GenericInput from './components/GenericInput';
-
+import { useGeolocated } from "react-geolocated";
 import WeatherDisplayCopy from './components/WeatherDisplayCopy';
 import WeatherDisplay from './components/WeatherDisplay';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Slider from 'react-slick'; 
 import '../node_modules/slick-carousel/slick/slick.css';
 import '../node_modules/slick-carousel/slick/slick-theme.css';
 
+
 function App() {
   const [city, setCity] = useState();
   const [weatherCurrentData, setCurrentWeatherData] = useState(null);
-  const apiKey = '7eaa1d530e40021b70dbcaf065391712'; 
+  const apiKey = process.env.REACT_APP_API_KEY;
   const [weatherData, setWeatherData] = useState(null);
+  const [isGeolocating, setIsGeolocating] = useState(false); 
+
+  const {
+    coords,
+    isGeolocationAvailable,
+    isGeolocationEnabled,
+    getPosition
+  } = useGeolocated({
+    positionOptions: {
+      enableHighAccuracy: false,
+    },
+    userDecisionTimeout: 5000,
+  });
+
+  useEffect(() => {
+    if (coords && isGeolocating) {
+      const { latitude, longitude } = coords;
+      fetchCurrentWeatherData(latitude, longitude);
+      fetchWeatherData(latitude, longitude);
+      setIsGeolocating(false);  // Réinitialise après géolocalisation
+    }
+  }, [coords, isGeolocating]);
+
+  function handleGeolocateClick() {
+    setIsGeolocating(true);  // Active la géolocalisation
+  }
 
   function addCity(city) {
     setCity(city);
@@ -100,25 +127,28 @@ function App() {
         placeholder="Entrez le nom d'une ville"
         onAddItem={addCity}
       />
-      
+       <button onClick={handleGeolocateClick}>
+        Me géolocaliser
+      </button>
      
 
 {weatherCurrentData && (
-        <WeatherDisplayCopy
+        <WeatherDisplay
           description={weatherCurrentData.weather[0].description}
           temperature={weatherCurrentData.main.temp}
           high={weatherCurrentData.main.temp_max} // Assurez-vous que ces valeurs sont disponibles
           low={weatherCurrentData.main.temp_min}
           icon={weatherCurrentData.weather[0].icon}
           city={city}
-          date='En direct'
+          date={Date.now()}
         />
       )}
       
       {weatherData && weatherData.list && (
+        
         <Slider {...settings}>
           {weatherData.list.map((forecast, index) => (
-            <WeatherDisplayCopy
+            <WeatherDisplay
               key={index}
               description={forecast.weather[0].description}
               temperature={forecast.main.temp}

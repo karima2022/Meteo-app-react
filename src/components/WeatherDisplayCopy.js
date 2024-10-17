@@ -1,17 +1,20 @@
 import React from 'react';
 
 const WeatherDisplayCopy = ({ description, temperature, icon, city, date, high, low }) => {
-  const formatDate = (dateString) => {
+  const formatDateTime = (dateString) => {
     const date = new Date(dateString);
-    return new Intl.DateTimeFormat('fr-FR', {
+
+    const options = {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
-    }).format(date);
-  };
+      hour: 'numeric',
+      minute: 'numeric',
+    };
 
-  const formattedDate = formatDate(date);
-  
+    return new Intl.DateTimeFormat('fr-FR', options).format(date);
+  };
+  const formattedDateTime = formatDateTime(date);
   return (
     <div className="wrapper">
       <div className="weather">
@@ -38,7 +41,7 @@ const WeatherDisplayCopy = ({ description, temperature, icon, city, date, high, 
           </div>
           <div className="clearfix"></div>
           <div className="date">
-            <p>{formattedDate}</p>
+            <p>{formattedDateTime}</p>
           </div>
         </div>
       </div>
